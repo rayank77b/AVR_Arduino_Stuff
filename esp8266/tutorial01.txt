@@ -1,0 +1,128 @@
+ESP8266 ESP-01 Serial WIFI Wireless Transceiver Wireless Module LWIP AP+STA
+
+https://www.geekstips.com/esp8266-arduino-tutorial-iot-code-example/
+https://www.instructables.com/id/Getting-Started-With-the-ESP8266-ESP-01/
+http://stefanfrings.de/esp8266/
+http://arduino.esp8266.com/Arduino/versions/2.3.0/doc/reference.html
+
+
+
+CHIPS:
+ ESP8266EX 012017 PC3V72
+ 25L8006E M2I-12G 3x245300 K164075  <-- 8Mbit Serial Flash 
+
+
+ESP8266-01Technical specifications
+http://arduino.esp8266.com/Arduino/versions/2.3.0/doc/reference.html
+    32-bit RISC CPU: Tensilica Xtensa LX106 running at 80 MHz **
+    64 KiB of instruction RAM, 96 KiB of data RAM
+    External QSPI flash – 512 KiB to 4 MiB* (up to 16 MiB is supported)
+    IEEE 802.11 b/g/n Wi-Fi
+    Integrated TR switch, balun, LNA, power amplifier and matching network
+    WEP or WPA/WPA2 authentication, or open networks
+    16 GPIO pins **
+    SPI, I²C,
+    I²S interfaces with DMA (sharing pins with GPIO)
+    UART on dedicated pins, plus a transmit-only UART can be enabled on GPIO2
+    1 10-bit ADC
+
+Pins:
+Wlan chips   Rx    Vcc
+             GPi0  Reset
+             Gpi2  CH_PD
+             GND   Tx
+
+
+USB-TxRxUart <-> ESP8266-1
+
+
+
+Rx    <-> Rx
+Tx    <-> Tx
+GND   <-> GND
++3.3V <-> Vcc,CH_PD
+
+AT
+OK
+
+AT+GMR
+AT version:1.1.0.0(May 11 2016 18:09:56)
+SDK version:1.5.4(baaeaebb)
+compile time:Mar  9 2017 19:22:12
+OK
+AT+CWMODE=1
+AT+CWLAP
+
++CWLAP:(3,"DIRECT-9A-HP OfficeJet 3830",-74,"84:a9:3e:ec:f1:9b",1,50,0)
++CWLAP:(3,"FRITZ!Box 7560 MC",-71,"7c:ff:4d:c6:50:a9",1,40,0)
++CWLAP:(4,"Azumanga_Daioh!",-69,"02:26:4d:a6:fc:17",1,26,0)
++CWLAP:(4,"NetworkSpam",-63,"00:21:29:06:4b:e0",2,51,0)
++CWLAP:(4,"ESPTest",-64,"00:21:29:06:4b:e1",2,51,0)
++CWLAP:(3,"FRITZ!Box 7490",-83,"e8:df:70:d7:c6:aa",6,31,0)
++CWLAP:(3,"FRITZ!Box 7490",-83,"34:31:c4:45:11:c1",6,35,0)
++CWLAP:(4,"neo-network",-82,"a8:d3:f7:18:fd:22",10,36,0)
++CWLAP:(4,"neo-guest-network",-82,"a8:d3:f7:18:fd:23",10,36,0)
++CWLAP:(3,"HZN241157940",-89,"1c:3a:de:85:d4:56",12,40,0)
+
+OK
+
+AT+CWJAP="Pussycat","supersecret"
+
+AT+CWJAP="xxx","yyyyy"
+WIFI CONNECTED
+WIFI GOT IP
+OK
+
+AT+CWJAP?
+
++CWJAP:"ESPTest","00:21:29:06:4b:e1",2,-66
+
+OK
+
+
+AT+CIFSR
++CIFSR:STAIP,"192.168.178.60"
++CIFSR:STAMAC,"5c:cf:7f:3c:a1:97"
+OK
+
+AT+CIPMUX=1 #  Modul mehrere Verbindungen erlauben soll.
+
+AT+CIPSERVER=1,5000
+OK
+
+
+$ nc 192.168.178.60 5000
+hellao
+adsf
+
+0,CONNECT            # kanal 0
++IPD,0,7:hellao
++IPD,0,5:adsf
+
+
+AT+CIPSEND=0,9  #  auf kanal 0, send 9 bytes
+
+
+OK
+> Welcome!
+busy s...
+
+Recv 9 bytes
+
+SEND OK
+
+$ nc 192.168.178.60 5000
+hellao
+adsf
+Welcome!
+
+
+
+
+
+
+
+
+
+
+

@@ -6,6 +6,7 @@ assemblieren:
 disassemblieren:
 	avr-objdump  -m avr -D atm8_1.hex
 
+    avr-objdump -S timer00.cpp.o 
 
 
 upload:
