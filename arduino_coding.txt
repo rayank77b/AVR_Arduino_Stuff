@@ -1,0 +1,50 @@
+Arduino
+
+
+void setup() {  // one time
+}
+
+// the loop function runs over and over again forever
+void loop() {
+}
+
+
+delay(1);  // ms
+unsigned long currentMillis = millis();
+
+//Serial:
+Serial.begin(9600);
+ Serial.println(sensorValue);
+
+
+// Digital
+pinMode(LED_BUILTIN, OUTPUT);
+  digitalWrite(LED_BUILTIN, HIGH);   
+  digitalWrite(LED_BUILTIN, LOW);   
+
+pinMode(buttonPin, INPUT);
+int buttonState = digitalRead(buttonPin);
+
+  pinMode(2, INPUT_PULLUP);
+
+
+
+//Analog
+
+int sensorValue = analogRead(A0);
+analogWrite(led, brightness);
+
+
+
+// PWM
+int led = 9;           // the PWM pin the LED is attached to
+pinMode(led, OUTPUT);
+analogWrite(led, brightness);
+
+// Tone over PWM?
+
+tone(8, notes[thisSensor], 20);  // Pin 8
+
+
+
+

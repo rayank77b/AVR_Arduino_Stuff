@@ -1,0 +1,81 @@
+simple USB USBASP v2.0 Adapter
+Bus 002 Device 003: ID 16c0:05dc Van Ooijen Technische Informatica shared ID for use with libusb
+
+Bus 002 Device 010: ID 03eb:c8b4 Atmel Corp. USBHID
+
+
+Quarz 12MHz
+default connection to at90s1200
+see: http://www.learningaboutelectronics.com/Articles/Program-AVR-chip-using-a-USBASP-with-10-pin-cable.php
+
+
+/etc/udev/rules.d/60-objdev.rules
+SUBSYSTEM=="usb", ENV{DEVTYPE}=="usb_device", ATTRS{idVendor}=="16c0", ATTRS{idProduct}=="05dc", MODE="0666", SYMLINK+="USBasp"
+SUBSYSTEM=="usb", ENV{DEVTYPE}=="usb_device", ATTRS{idVendor}=="03eb", ATTRS{idProduct}=="c8b4", MODE="0666", SYMLINK+="USBasp"
+/etc/init.d/udev restart
+
+
+ls /dev/USBasp  -l
+lrwxrwxrwx 1 root root 15 Aug  8 20:01 /dev/USBasp -> bus/usb/002/005
+
+
+# avrdude -p 1200 -c usbasp
+
+avrdude: warning: cannot set sck period. please check for usbasp firmware update.
+avrdude: AVR device initialized and ready to accept instructions
+
+Reading | ################################################## | 100% 0.01s
+
+avrdude: Device signature = 0x000102
+avrdude: Expected signature for AT90S1200 is 1E 90 01
+         Double check chip, or use -F to override this check.
+
+avrdude done.  Thank you.
+
+
+https://github.com/DarkSector/AVR/blob/master/asm/include/1200def.inc
+
+apt install avra
+
+
+
+
+# avrdude -p 1200 -c usbasp -U flash:r:led1b.hex 
+
+avrdude: warning: cannot set sck period. please check for usbasp firmware update.
+avrdude: error: program enable: target doesn't answer. 1 
+avrdude: initialization failed, rc=-1
+         Double check connections and try again, or use -F to override
+         this check.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
